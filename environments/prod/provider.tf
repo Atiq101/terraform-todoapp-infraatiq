@@ -6,12 +6,12 @@ terraform {
     }
   }
   
-  //backend "azurerm" {
-    //resource_group_name  = "RG-ATIQ"
-    //storage_account_name = "atiqstroage321"
-    //container_name       = "atiqcontainer321"
-    //key                  = "prod.tfstate"
-//  }
+  backend "azurerm" {
+    resource_group_name  = "RG-ATIQ"
+    storage_account_name = "atiqstroage321"
+    container_name       = "atiqcontainer321"
+    key                  = "prod.tfstate"
+  }
 }
 
 provider "azurerm" {
