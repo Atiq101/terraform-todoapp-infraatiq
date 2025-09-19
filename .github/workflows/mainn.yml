@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraformjob:
-    name: Terraformjobtest123
+    name: Terraformjobtest12345
     runs-on: dhondhu-khilji
 
     steps:
@@ -38,9 +38,6 @@ jobs:
       - name: Terraform Plan
         run: terraform plan -input=false
         
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -input=false
-       
-
+   
 
 
