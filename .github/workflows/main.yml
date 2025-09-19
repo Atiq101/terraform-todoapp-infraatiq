@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   terraformjob:
-    name: Terraformjobtest
+    name: Terraformjobtest123
     runs-on: dhondhu-khilji
 
     steps:
