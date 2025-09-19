@@ -6,9 +6,9 @@ terraform {
     }
   }
   backend "azurerm" {
-    resource_group_name  = "rg-devopsinsiders"
-    storage_account_name = "twostates"
-    container_name       = "tfstate"
+    resource_group_name  = "RG-ATIQ"
+    storage_account_name = "atiqstroage321"
+    container_name       = "atiqcontainer321"
     key                  = "dev.tfstate"
   }
 }
