@@ -51,3 +51,7 @@ jobs:
 
       - name: Show Terraform Plan
         run: terraform show -no-color tfplan.out
+
+      - name: Terraform Apply
+        run: terraform apply -input=false -auto-approve tfplan.out
+        working-directory: environments/dev
