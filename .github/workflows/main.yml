@@ -10,7 +10,7 @@ permissions:
 jobs:
   terraformjob:
     name: Terraformjobtest
-    runs-on: dhondu-khilji
+    runs-on: dhondhu-khilji
 
     steps:
       - name: Checkout
