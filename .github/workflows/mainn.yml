@@ -44,8 +44,12 @@ jobs:
         run: terraform validate
         working-directory: environments/dev
 
-      - name: Terraform Plan
-        run: terraform plan -input=false
+      - name: Terraform Plan (detailed)
+        run: terraform plan -input=false -out=tfplan.out
+        working-directory: environments/dev
+
+      - name: Show Terraform Plan
+        run: terraform show -no-color tfplan.out
         working-directory: environments/dev
 
 
