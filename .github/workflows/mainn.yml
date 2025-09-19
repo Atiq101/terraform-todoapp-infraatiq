@@ -30,10 +30,22 @@ jobs:
 
       - name: Terraform Initt
         run: terraform init
+        working-directory: environments/dev
  
 
       - name: Terraform Format
         run: terraform fmt -check -recursive
+
+      - name: terraform-fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+        working-directory: environments/dev
+         
+        
+     
+
+        
 
       - name: Terraform Plan
         run: terraform plan -input=false
