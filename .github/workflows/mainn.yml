@@ -45,13 +45,55 @@ jobs:
         run: terraform validate
         working-directory: environments/dev
 
-      - name: Terraform Plan (detailed)
-        run: terraform plan -input=false -out=tfplan.out  
+      - run: terraform plan -input=false -out=tfplan.out
         working-directory: environments/dev
 
-      - name: Show Terraform Plan
-        run: terraform show -no-color tfplan.out
+      - run: terraform show -no-color tfplan.out
+        working-directory: environments/dev
 
+      - name: Upload Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: environments/dev/tfplan.out
+
+    
       - name: Terraform Apply
+        runs-on: dhondhu-khilji
+        needs: plan
+        environment: dev   # 🔒 requires manual approval in GitHub settings
+
+        steps:
+         - uses: actions/checkout@v4 
+
+      - uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.CLIENT_ID }}
+          tenant-id: ${{ secrets.TENANT_ID }}
+          subscription-id: ${{ secrets.SUBSCRIPTION_ID }}
+
+      - uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+
+      - run: terraform init
+        working-directory: environments/dev
+
+      - name: Download Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
+          path: environments/dev
+
+      - run: terraform apply -input=false -auto-approve tfplan.out
+        working-directory: environments/dev
+
+
+
+
+
+
+          
+
         run: terraform apply -input=false -auto-approve tfplan.out
         working-directory: environments/dev
