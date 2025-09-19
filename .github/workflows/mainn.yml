@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v4
 
       - name: Azure Login
-        uses: azure/login@v2.3.0
+        uses: azure/login@v2
         with:
           client-id: 966902af-9d41-4417-bf64-f2bd84aac8ca
           tenant-id: 3f89de9e-413d-40f2-811c-4f1ab9c97340
@@ -26,30 +26,29 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
-          terraform_version: 1.8.5   # adjust if needed
+          terraform_version: 1.8.5
 
-      - name: Terraform Initt
+      - name: Verify Terraform
+        run: terraform -version
+        shell: pwsh
+
+      - name: Terraform Init
         run: terraform init
         working-directory: environments/dev
- 
 
-      - name: Terraform Format
+      - name: Terraform Format Check
         run: terraform fmt -check -recursive
-
-      - name: terraform-fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
         working-directory: environments/dev
-         
-        
-     
 
-        
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: environments/dev
 
       - name: Terraform Plan
         run: terraform plan -input=false
-        
-   
+        working-directory: environments/dev
 
 
+      
+        run: terraform plan -input=false
+        working-directory: environments/dev
