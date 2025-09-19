@@ -23,15 +23,7 @@ jobs:
           tenant-id: 3f89de9e-413d-40f2-811c-4f1ab9c97340
           subscription-id: aa50dcb0-04de-41e4-bb3e-260e54d18bec
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.8.5
-
-      - name: Verify Terraform
-        run: terraform -version
-        shell: pwsh
-
+      
       - name: Terraform Init
         run: terraform init
         working-directory: environments/dev
